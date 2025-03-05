@@ -40,7 +40,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def serve_html(self, filename: str, status_code: int = 200) -> None:
-        file_path = BASE_DIR / filename
+        file_path =  BASE_DIR / "templates" / filename
         if file_path.exists():
             self.send_response(status_code)
             self.send_header("Content-type", "text/html")
@@ -76,7 +76,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         except (FileNotFoundError, json.JSONDecodeError):
             messages = {}
 
-        template_path = BASE_DIR / "read.html"
+        template_path = BASE_DIR / "templates" / "read.html"
         template = Template(template_path.read_text(encoding="utf-8"))
         rendered_html = template.render(messages=messages)
 
